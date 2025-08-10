@@ -1,21 +1,23 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'login_screen.dart'; 
+import 'login_screen.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 // import 'package:firebase_auth/firebase_auth.dart';
 
-void main() async {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await dotenv.load(fileName: ".env");
 
   if (kIsWeb) {
     await Firebase.initializeApp(
-      options: const FirebaseOptions(
-        apiKey: "AIzaSyDn98Z0MwU-VCujoCA6BUAshcpgS8xlqK0",
-        authDomain: "dyslexiaapp-1.firebaseapp.com",
-        projectId: "dyslexiaapp-1",
-        storageBucket: "dyslexiaapp-1.appspot.com",
-        messagingSenderId: "577919622150",
-        appId: "1:577919622150:web:b77d24cae0e7fceaceb787",
+      options: FirebaseOptions(
+        apiKey: dotenv.env['API_KEY']!,
+        authDomain: dotenv.env['AUTH_DOMAIN']!,
+        projectId: dotenv.env['PROJECT_ID']!,
+        storageBucket: dotenv.env['STORAGE_BUCKET']!,
+        messagingSenderId: dotenv.env['MESSAGING_SENDER_ID']!,
+        appId: dotenv.env['APP_ID']!,
       ),
     );
   } else {
@@ -36,7 +38,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const LoginScreen(), 
+      home: const LoginScreen(),
     );
   }
 }
