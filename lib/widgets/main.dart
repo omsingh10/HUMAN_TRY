@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'login_screen.dart';
+import '../auth/login_screen.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 // import 'package:firebase_auth/firebase_auth.dart';
 
