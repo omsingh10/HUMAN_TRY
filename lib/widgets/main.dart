@@ -1,12 +1,12 @@
+import 'package:desco/widgets/home_screen.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-
-import '../auth/login_screen.dart';
+import 'firebase_options.dart';
 
 Future<void> main() async {
-  // Ensure Flutter binding is initialized before using platform channels
+  // Ensure Flutter binding is initialized
   WidgetsFlutterBinding.ensureInitialized();
 
   // Load environment variables
@@ -25,7 +25,9 @@ Future<void> main() async {
       ),
     );
   } else {
-    await Firebase.initializeApp();
+    await Firebase.initializeApp(
+      options: DefaultFirebaseOptions.currentPlatform,
+    );
   }
 
   runApp(const MyApp());
@@ -43,7 +45,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const LoginScreen(),
+      home: const HomeScreen(),
     );
   }
 }
